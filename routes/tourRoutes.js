@@ -1,6 +1,7 @@
 const express = require('express');
+
 const router = express.Router();
-const tourController = require('./../controllers/tourController');
+const tourController = require('../controllers/tourController');
 
 router.param('id', tourController.checkID);
 // crete a checkboddy middleware
