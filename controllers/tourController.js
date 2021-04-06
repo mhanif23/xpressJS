@@ -5,7 +5,7 @@ const tours = JSON.parse(
 );
 
 exports.checkID = (req, res, next, val) => {
-  console.log(`toure id: ${val}`);
+  // console.log(`toure id: ${val}`);
   if (req.params.id * 1 > tours.length)
     return res.status(404).json({
       status: 'fail',
@@ -15,7 +15,7 @@ exports.checkID = (req, res, next, val) => {
 };
 
 exports.checkBody = (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   if (!req.body.name || !req.body.price)
     return res.status(400).json({
       status: 'fail',
@@ -64,12 +64,13 @@ exports.updateTour = (req, res) => {
 exports.createTour = (req, res) => {
   // console.log(req.body);
   const newId = tours[tours.length - 1].id + 1;
-  const newTour = Object.assign({ id: newId }, req.body);
+  // eslint-disable-next-line node/no-unsupported-features/es-syntax
+  const newTour = { id: newId, ...req.body };
   tours.push(newTour);
   fs.writeFile(
     `${__dirname}/dev-data/data/tours-simple.json`,
     JSON.stringify(tours),
-    (err) => {
+    () => {
       res.status(201).json({
         status: 'success',
         data: {

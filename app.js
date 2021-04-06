@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const morgan = require('morgan');
 const tourRouter = require('./routes/tourRoutes');
@@ -12,6 +13,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 app.use((req, res, next) => {
+  // eslint-disable-next-line no-console
   console.log('hello from the middleware');
   next();
 });
