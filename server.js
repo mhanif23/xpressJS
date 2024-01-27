@@ -17,6 +17,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
+    // eslint-disable-next-line no-console
     console.log('DB CONNECTED');
   });
 
